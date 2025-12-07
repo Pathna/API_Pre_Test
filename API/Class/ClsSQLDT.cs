@@ -12,10 +12,6 @@ public class ClsSQLDT
     public static Preregitor_Response Preregitor(Preregitor_Request data)
     {
         Preregitor_Response response = new Preregitor_Response();
-        if (data.password != data.confirm_password)
-        {
-            return new Preregitor_Response {status = "Error", message = "รหัสผ่านไม่ตรงกัน" };
-        }
 
         string HashedPassword = BCrypt.Net.BCrypt.HashPassword(data.password);
 
@@ -73,8 +69,7 @@ public class ClsSQLDT
 
         NpgsqlParameter[] param =
         {
-            new NpgsqlParameter("@username", data.username),
-            new NpgsqlParameter("@password", data.password)
+            new NpgsqlParameter("@username", data.username)
         };
 
         DataTable dt = Database.FillDS_PGSQL(SQL, param);

@@ -34,7 +34,7 @@ namespace API.Controllers
             var result = ClsSQLDT.Login_JWT(data);
             if(result.status == "Error")
             {
-                return BadRequest(new { status = "Error", message = "ผู้ใช้นี้มีอยู่แล้ว" });
+                return BadRequest(new { status = "Error", message = result.message });
             }
 
             return Ok(new { status = "Success", message = data.username, toekn = result.token });
